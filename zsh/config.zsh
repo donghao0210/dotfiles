@@ -6,28 +6,6 @@
 #  \___\___/|_| |_|_| |_|\__, |
 #                        |___/
 
-# $Paths=(
-#     $HOME/.local/bin
-#     /opt/anaconda/bin/
-#     $HOME/.bin
-#     $HOME/.cargo/bin/navi
-#     $HOME/.modular/pkg/packages.modular.com_mojo/bin/
-# )
-# Define the paths in an array
-# Paths=(
-#     "$HOME/.local/bin"
-#     "/opt/anaconda/bin"
-#     "$HOME/.bin"
-#     "$HOME/.cargo/bin/navi"
-#     "$HOME/.modular/pkg/packages.modular.com_mojo/bin"
-# )
-
-# for path in "${Paths[@]}"; do
-#     if [ -d "$path" ]; then
-#         export PATH="$path:$PATH"
-#     fi
-# done
-# Example: Add custom directories to the PATH
 export PATH="$HOME/.local/bin:/opt/anaconda/bin:$HOME/.bin:$HOME/.cargo/bin/navi:$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 
