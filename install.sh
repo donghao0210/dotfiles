@@ -9,10 +9,6 @@ log_not_found_packages() {
 }
 
 # Downloading Configuration Files
-curl -sLfo ~/.p10k.zsh https://raw.githubusercontent.com/ali-commits/dotfiles/master/p10k/p10k.zsh
-curl -sLfo ~/.zshrc https://raw.githubusercontent.com/ali-commits/dotfiles/master/zshrc
-curl -sLfo ~/.vimrc https://raw.githubusercontent.com/ali-commits/dotfiles/master/vimrc
-curl -sLfo ~/.config/neofetch/config.conf https://raw.githubusercontent.com/ali-commits/dotfiles/master/neofetch/neofetch --create-dirs
 curl -sLfo ~/.p10k.zsh https://raw.githubusercontent.com/donghao0210/dotfiles/master/p10k/p10k.zsh
 curl -sLfo ~/.zshrc https://raw.githubusercontent.com/donghao0210/dotfiles/master/zshrc
 curl -sLfo ~/.vimrc https://raw.githubusercontent.com/donghao0210/dotfiles/master/vimrc
