@@ -5,7 +5,7 @@ log_not_found_packages() {
     echo "The following packages were not found:"
     for pkg in "${not_found_packages[@]}"; do
         echo " - $pkg"
-    done
+    done 
 }
 
 # Downloading Configuration Files
