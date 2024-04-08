@@ -28,13 +28,13 @@ common_packages=(
     zoxide
     bpython
     mtr
-    pyenv
     # Add or remove common packages as needed
 )
 
 # Specific packages for Arch Linux
 arch_packages=(
     python-argcomplete
+    pyenv
     # Add or remove Arch specific packages as needed
 )
 
