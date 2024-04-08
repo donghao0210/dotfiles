@@ -25,7 +25,7 @@ export FUNCTIONS=~/.zsh/functions.zsh
 export ALIASES=~/.zsh/aliases.zsh
 
 ### download the resource files from github
-REPO=https://raw.githubusercontent.com/donghao0210/dotfiles/master/zsh
+REPO=https://raw.githubusercontent.com/donghao0210/dotfiles/main/zsh
 
 [[ ! -f $PLUGINS ]] && curl $REPO/plugins.zsh > $PLUGINS                 
 [[ ! -f $CONFIGS ]] && curl $REPO/config.zsh > $CONFIGS              
