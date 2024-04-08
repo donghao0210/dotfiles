@@ -21,6 +21,7 @@ common_packages=(
     zsh
     grc
     neofetch
+    nano
     neovim
     exa
     ripgrep
