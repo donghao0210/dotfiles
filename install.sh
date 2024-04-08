@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 # Function to log not found packages
 log_not_found_packages() {
@@ -14,8 +14,8 @@ curl -sLfo ~/.zshrc https://raw.githubusercontent.com/donghao0210/dotfiles/maste
 curl -sLfo ~/.vimrc https://raw.githubusercontent.com/donghao0210/dotfiles/master/vimrc
 curl -sLfo ~/.config/neofetch/config.conf https://raw.githubusercontent.com/donghao0210/dotfiles/master/neofetch/neofetch --create-dirs
 
-# Package list
-packages=(
+# Common packages list
+common_packages=(
     docker
     docker-compose
     zsh
@@ -28,11 +28,20 @@ packages=(
     zoxide
     bpython
     mtr
-    python-argcomplete
-
-    # Add or remove packages as needed
+    pyenv
+    # Add or remove common packages as needed
 )
 
+# Specific packages for Arch Linux
+arch_packages=(
+    python-argcomplete
+    # Add or remove Arch specific packages as needed
+)
+
+# Specific packages for Debain-based distributions
+debain_packages=(
+    # Add or remove Debain specific packages as needed
+)
 # Initialize array for not found packages
 not_found_packages=()
 
@@ -41,6 +50,8 @@ install_packages() {
     local pkg_manager=$1
     local install_cmd=$2
     local update_cmd=$3
+    shift 3
+    local packages=("$@")
 
     # Update repositories
     eval "$update_cmd"
@@ -55,34 +66,27 @@ install_packages() {
 
 # Detect package manager and install packages
 if command -v apt >/dev/null 2>&1; then
-    install_packages "apt" "sudo apt install -y" "sudo apt update"
+    # Common packages for Debian-based distributions
+    install_packages "apt" "sudo apt install -y" "sudo apt update" "${common_packages[@]}" "${debain_packages[@]}"
 elif command -v paru >/dev/null 2>&1; then
-    install_packages "paru" "paru -S --noconfirm --needed" "paru -Syyyuu"
+    # Common packages for Arch Linux
+    install_packages "paru" "paru -S --noconfirm --needed" "paru -Syyyuu" "${common_packages[@]}" "${arch_packages[@]}"
 elif command -v pacman >/dev/null 2>&1; then
-    install_packages "pacman" "sudo pacman -S --noconfirm --needed" "sudo pacman -Syyuu"
+    # Common packages for Arch Linux
+    install_packages "pacman" "sudo pacman -S --noconfirm --needed" "sudo pacman -Syyuu" "${common_packages[@]}" "${arch_packages[@]}"
 elif command -v dnf >/dev/null 2>&1; then
-    install_packages "dnf" "sudo dnf -y install" "sudo dnf -y update"
+    # Common packages for Fedora and Red Hat-based distributions
+    install_packages "dnf" "sudo dnf -y install" "sudo dnf -y update" "${common_packages[@]}"
 elif command -v zypper >/dev/null 2>&1; then
-    install_packages "zypper" "sudo zypper -y install" "sudo zypper -y update"
+    # Common packages for openSUSE
+    install_packages "zypper" "sudo zypper -y install" "sudo zypper -y update" "${common_packages[@]}"
 elif command -v yum >/dev/null 2>&1; then
-    install_packages "yum" "sudo yum -y install" "sudo yum -y update"
+    # Common packages for CentOS and Red Hat-based distributions
+    install_packages "yum" "sudo yum -y install" "sudo yum -y update" "${common_packages[@]}"
 else
     echo "No compatible package manager found."
     exit 1
 fi
-
-
-
-# Docker group configuration
-sudo groupadd docker && sudo usermod -aG docker $USER
-
-# Create 'legend' group and configure sudoers
-sudo groupadd legend
-sudo usermod -aG legend $USER
-
-# Configure sudoers to allow 'legend' group members to use sudo without a password
-# Note: Using 'tee' command as a safer way to modify sudoers
-echo "%legend ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/legend
 
 # Log not found packages
 if [ ${#not_found_packages[@]} -ne 0 ]; then
